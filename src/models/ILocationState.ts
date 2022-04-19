@@ -1,3 +1,3 @@
 export interface ILocationState {
-    state?:string
+  state?: string;
 }

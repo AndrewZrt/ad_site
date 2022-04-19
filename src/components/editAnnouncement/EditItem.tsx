@@ -15,7 +15,7 @@ const EditItem: React.FunctionComponent = () => {
 
   const navigate = useNavigate();
 
-  const currentPost: any = announcements.find((value) => value.id === state); //!!!!!!!!!!!!!!!!!!!!!!
+  const currentPost: any = announcements.find((value) => value.id === state);
 
   const [newTitle, setNewTitle] = useState<string>(currentPost.title);
   const [newDescription, setNewDescription] = useState<string>(
@@ -78,4 +78,4 @@ const EditItem: React.FunctionComponent = () => {
     </div>
   );
 };
-export default EditItem
+export default EditItem;

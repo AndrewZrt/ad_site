@@ -70,4 +70,4 @@ const AddItem: React.FunctionComponent = () => {
     </div>
   );
 };
-export default AddItem
+export default AddItem;

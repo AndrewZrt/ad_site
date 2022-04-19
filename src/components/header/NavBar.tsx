@@ -10,7 +10,7 @@ const NavBar: React.FunctionComponent = () => {
   const { announcements } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
 
-  let [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
 
   const filteredPosts = announcements.filter((item) => {
     return item.title.toLowerCase().includes(title.toLowerCase());

@@ -10,7 +10,6 @@ import { ILocationState } from "../../models/ILocationState";
 import { Card, Container } from "react-bootstrap";
 import "../details/Details.css";
 
-
 const Details: React.FunctionComponent = () => {
   const { announcements } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
@@ -96,5 +95,4 @@ const Details: React.FunctionComponent = () => {
   );
 };
 
-
-export default Details
+export default Details;

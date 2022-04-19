@@ -5,8 +5,6 @@ import { IData } from "../../models/IData";
 import { Card } from "react-bootstrap";
 import "../announcementItem/AnnouncementItem.css";
 
-
-
 const AnnouncementItem: React.FC<IData> = ({ post }: IData) => {
   return (
     <Card className={"container_item"}>

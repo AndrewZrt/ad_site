@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
@@ -9,11 +9,16 @@ import { ILocationState } from "../../models/ILocationState";
 
 import { Card, Container } from "react-bootstrap";
 import "../details/Details.css";
+import SimilarPosts from "../similarPosts/SimilarPosts";
 
 const Details: React.FunctionComponent = () => {
-  const { announcements } = useAppSelector((state) => state.mainReducer);
+  const { announcements, similarPosts } = useAppSelector(
+    (state) => state.mainReducer
+  );
   const dispatch = useAppDispatch();
-
+  useEffect(() => {
+    findSimilar();
+  }, [similarPosts]);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -71,18 +76,6 @@ const Details: React.FunctionComponent = () => {
           >
             Delete
           </button>
-
-          <Link to={`/similarPosts`}>
-            <button
-              className="btn btn-secondary px-3 btn_dt "
-              onClick={() => {
-                findSimilar();
-              }}
-            >
-              {" "}
-              Show top 3 similar
-            </button>
-          </Link>
           <button
             className="btn btn-secondary px-3 btn_dt "
             onClick={() => navigate("/")}
@@ -91,6 +84,7 @@ const Details: React.FunctionComponent = () => {
           </button>
         </Container>
       </Card>
+      <SimilarPosts />
     </div>
   );
 };

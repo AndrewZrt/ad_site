@@ -6,7 +6,6 @@ import AddItem from "../components/addAnnouncement/AddItem";
 import EditItem from "../components/editAnnouncement/EditItem";
 import Details from "../components/details/Details";
 import SearchPosts from "../components/searchBlock/SearchPosts";
-import SimilarPosts from "../components/similarPosts/SimilarPosts";
 
 const RoutingConfig: React.FunctionComponent = () => {
   return (
@@ -17,7 +16,6 @@ const RoutingConfig: React.FunctionComponent = () => {
         <Route path="/edit/post/:id" element={<EditItem />} />
         <Route path="/details/post/:id" element={<Details />} />
         <Route path="/filtered" element={<SearchPosts />} />
-        <Route path="/similarPosts" element={<SimilarPosts />} />
       </Routes>
     </div>
   );

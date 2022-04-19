@@ -12,13 +12,11 @@ import "../details/Details.css";
 import SimilarPosts from "../similarPosts/SimilarPosts";
 
 const Details: React.FunctionComponent = () => {
-  const { announcements, similarPosts } = useAppSelector(
-    (state) => state.mainReducer
-  );
+  const { announcements } = useAppSelector((state) => state.mainReducer);
   const dispatch = useAppDispatch();
   useEffect(() => {
     findSimilar();
-  }, [similarPosts]);
+  }, []);
   const navigate = useNavigate();
 
   const location = useLocation();

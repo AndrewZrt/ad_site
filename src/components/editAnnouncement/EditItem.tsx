@@ -32,7 +32,6 @@ const EditItem: React.FunctionComponent = () => {
       date: date,
     };
     dispatch(setEditedPost(object));
-    navigate("/");
   };
   return (
     <div className={"wrapper"}>
@@ -59,6 +58,7 @@ const EditItem: React.FunctionComponent = () => {
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();
               handleSubmit();
+              navigate(-1);
             }}
           >
             Submit changes

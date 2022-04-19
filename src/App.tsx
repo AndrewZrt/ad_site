@@ -2,13 +2,17 @@ import React from 'react';
 import NavBar from "./components/header/NavBar";
 import RoutingConfig from "./routing/Routing";
 
-const App:React.FunctionComponent = () =>{
-  return (
-    <div>
-      <NavBar/>
-      <RoutingConfig/>
-    </div>
-  );
-}
+import {Container} from "react-bootstrap";
 
-export default App;
+    const App: React.FunctionComponent = () => {
+        return (
+            <>
+                <NavBar/>
+                <Container>
+                    <RoutingConfig/>
+                </Container>
+            </>
+        );
+    }
+
+    export default App;

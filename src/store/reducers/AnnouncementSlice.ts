@@ -1,29 +1,49 @@
-import {IAnnouncement} from "../../models/IAnnouncement";
+import {v4 as uuidv4} from 'uuid';
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
+import {IAnnouncement} from "../../models/IAnnouncement";
 
 interface State {
     announcements: IAnnouncement[];
-    isLoading:boolean;
-    addModal: boolean,
-    editModal: boolean
+    filteredPosts: IAnnouncement[];
+    similarPosts:IAnnouncement[]
 }
 
 const initialState:State ={
     announcements: [],
-    isLoading: false,
-    addModal: false,
-    editModal: false
+    filteredPosts:[],
+    similarPosts:[]
+
+
 }
 
-export const announcementSlice = createSlice({
+const announcementSlice = createSlice({
     name: 'main',
     initialState,
     reducers:{
-        addModalActive(state,action:PayloadAction<boolean>){
-            state.addModal=action.payload
+        addNewAnnouncement(state,action:PayloadAction<IAnnouncement>){
+            state.announcements.push({
+                id:uuidv4(),
+                ...action.payload
+            })
+        },
+        deletePost(state,action:PayloadAction<IAnnouncement[]>){
+            state.announcements=action.payload
+        },
+        setFilteredPosts(state,action:PayloadAction<IAnnouncement[]>){
+            state.filteredPosts=action.payload
+        },
+        setSimilarPosts(state,action:PayloadAction<IAnnouncement[]>){
+            state.similarPosts=action.payload
+        },
+        setEditedPost(state,action:PayloadAction<IAnnouncement>){
+            state.announcements=state.announcements.map(el => el.id === action.payload.id ? action.payload : el)
         }
+
+
+
     }
 })
 
 export default announcementSlice.reducer
-export const {addModalActive} = announcementSlice.actions
+export const {addNewAnnouncement,deletePost,setFilteredPosts,setSimilarPosts,setEditedPost} = announcementSlice.actions

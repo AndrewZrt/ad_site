@@ -16,7 +16,7 @@ const Details: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     findSimilar();
-  }, []);
+  });
   const navigate = useNavigate();
 
   const location = useLocation();

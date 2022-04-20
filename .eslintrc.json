@@ -28,8 +28,9 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "warn",
+        "prettier/prettier": 0,
         "require-jsdoc" : 0,
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }

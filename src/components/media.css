@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+    .nav {
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .add {
+        gap: 15px;
+    }
+
+}
+

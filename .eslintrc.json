@@ -28,7 +28,7 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier": "warn",
         "require-jsdoc" : 0,
         "@typescript-eslint/no-explicit-any": "off"
     }

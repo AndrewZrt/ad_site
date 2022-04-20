@@ -10,6 +10,7 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+
 }
 
 .add_buttons {
@@ -17,3 +18,4 @@
     justify-content: space-between;
     padding-left: 0;
 }
+

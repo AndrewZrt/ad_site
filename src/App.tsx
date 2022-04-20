@@ -3,6 +3,7 @@ import NavBar from "./components/header/NavBar";
 import RoutingConfig from "./routing/Routing";
 
 import { Container } from "react-bootstrap";
+import ScrollButton from "./components/ScrollButton/ScrollButton";
 
 const App: React.FunctionComponent = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FunctionComponent = () => {
       <NavBar />
       <Container>
         <RoutingConfig />
+        <ScrollButton />
       </Container>
     </>
   );

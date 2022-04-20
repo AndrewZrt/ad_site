@@ -9,3 +9,7 @@
     margin: 0 0 30px 20px;
     width: 20%;
 }
+
+.cursor_auto {
+    cursor: auto;
+}

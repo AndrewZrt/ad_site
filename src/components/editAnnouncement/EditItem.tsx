@@ -1,37 +1,32 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ILocationState } from "../../models/ILocationState";
-import { setEditedPost } from "../../store/reducers/AnnouncementSlice";
-
 import { Container, Form } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setEditedPost } from "../../store/reducers/AnnouncementSlice";
+import { IAnnouncement } from "../../models/IAnnouncement";
 
 const EditItem: React.FunctionComponent = () => {
   const { announcements } = useAppSelector((state) => state.mainReducer);
+
   const dispatch = useAppDispatch();
-
   const location = useLocation();
-  const state = location.state as ILocationState;
-
   const navigate = useNavigate();
 
-  const currentPost: any = announcements.find((value) => value.id === state);
+  const currentPost: IAnnouncement = announcements.find((value) => value.id === location.state)!;
 
   const [newTitle, setNewTitle] = useState<string>(currentPost.title);
-  const [newDescription, setNewDescription] = useState<string>(
-    currentPost.description
-  );
+  const [newDescription, setNewDescription] = useState<string>(currentPost.description);
 
   const handleSubmit = () => {
-    if (!newTitle || !newDescription) return;
     const date = new Date().toDateString();
-    const object = {
+
+    dispatch(setEditedPost({
       id: currentPost.id,
       title: newTitle,
       description: newDescription,
-      date: date,
-    };
-    dispatch(setEditedPost(object));
+      date: date
+    }));
   };
   return (
     <div className={"wrapper"}>

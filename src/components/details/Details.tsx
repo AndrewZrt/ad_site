@@ -1,55 +1,61 @@
 import React, { useEffect } from "react";
+import { Card, Container } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+
+import "../details/Details.css";
+
 import {
   deletePost,
   setSimilarPosts,
 } from "../../store/reducers/AnnouncementSlice";
-import { ILocationState } from "../../models/ILocationState";
-
-import { Card, Container } from "react-bootstrap";
-import "../details/Details.css";
 import SimilarPosts from "../similarPosts/SimilarPosts";
+import { IAnnouncement } from "../../models/IAnnouncement";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 const Details: React.FunctionComponent = () => {
   const { announcements } = useAppSelector((state) => state.mainReducer);
+
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    findSimilar();
-  });
   const navigate = useNavigate();
-
   const location = useLocation();
-  const state = location.state as ILocationState;
 
-  const post: any = announcements.find((value) => value.id === state);
+  useEffect(() => {
+    findSimilarPosts();
+  });
 
-  function deleteFunc(id?: string) {
-    const newList = [...announcements].filter((value) => value.id !== id);
-    dispatch(deletePost(newList));
+  const foundPost: IAnnouncement = announcements.find((value) => value.id === location.state)!;
+
+  function deletePostById(id: string) {
+    const filteredList = announcements.filter((value) => value.id !== id);
+
+    dispatch(deletePost(filteredList));
   }
 
-  const postSplitTitle = post.title.toLowerCase().replace(",", " ").split(" ");
-  const postSplitDesc = post.description
-    .toLowerCase()
-    .replace(",", " ")
-    .split(" ");
+  function split(postProperty: string, separator = " ") {
+    return postProperty.toLowerCase().replace(",", " ").split(separator);
+  }
 
-  function findSimilar() {
+  function findSimilarPosts() {
+    const foundPostTitleElements = split(foundPost.title);
+    const foundPostDescriptionElements = split(foundPost.description);
+
     const similarList = announcements
-      .filter((value) => {
-        const title = value.title.toLowerCase().replace(",", " ").split(" ");
-        const desc = value.description
-          .toLowerCase()
-          .replace(",", " ")
-          .split(" ");
-        const someTitle = title.some((value1) =>
-          postSplitTitle.includes(value1)
+      .filter((post) => {
+        const postTitleElements = split(post.title);
+        const postDescriptionElements = split(post.description);
+
+        const someTitle = postTitleElements.some((el) =>
+          foundPostTitleElements.includes(el)
         );
-        const someDesc = desc.some((value1) => postSplitDesc.includes(value1));
-        return someTitle && someDesc && value.id !== post.id;
+
+        const someDesc = postDescriptionElements.some((el) =>
+          foundPostDescriptionElements.includes(el)
+        );
+
+        return someTitle && someDesc && post.id !== foundPost.id;
       })
       .slice(0, 3);
+
     dispatch(setSimilarPosts(similarList));
   }
 
@@ -57,18 +63,18 @@ const Details: React.FunctionComponent = () => {
     <div>
       <Card className={"container_item"}>
         <Card.Body>
-          <Card.Text>Title: {post.title}</Card.Text>
-          <Card.Text>Description: {post.description}</Card.Text>
-          <Card.Text>Date of creation: {post.date}</Card.Text>
+          <Card.Text>Title: {foundPost.title}</Card.Text>
+          <Card.Text>Description: {foundPost.description}</Card.Text>
+          <Card.Text>Date of creation: {foundPost.date}</Card.Text>
         </Card.Body>
         <Container className={"edit_buttons"}>
-          <Link to={`/edit/post/${post.id}`} state={post.id}>
+          <Link to={`/edit/post/${foundPost.id}`} state={foundPost.id}>
             <button className="btn btn-success px-4 btn_dt ">Edit</button>
           </Link>
           <button
             className="btn btn-danger px-3 btn_dt "
             onClick={() => {
-              deleteFunc(post.id);
+              deletePostById(foundPost.id!);
               navigate("/");
             }}
           >

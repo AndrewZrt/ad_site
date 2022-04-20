@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IData } from "../../models/IData";
-
 import { Card } from "react-bootstrap";
+
 import "../announcementItem/AnnouncementItem.css";
+
+import { IAnnouncement } from "../../models/IAnnouncement";
+
+export interface IData {
+  post: IAnnouncement;
+}
 
 const AnnouncementItem: React.FC<IData> = ({ post }: IData) => {
   return (
@@ -15,8 +20,12 @@ const AnnouncementItem: React.FC<IData> = ({ post }: IData) => {
         <Card.Title>{post.description}</Card.Title>
       </Card.Body>
 
-      <Link to={`/details/post/${post.id}`} state={post.id}>
-        <button className="btn  btn-warning btn_sd ">Show details</button>
+      <Link
+        to={`/details/post/${post.id}`}
+        state={post.id}
+        className={"cursor_auto"}
+      >
+        <button className="btn  btn-warning btn_sd but">Show details</button>
       </Link>
     </Card>
   );

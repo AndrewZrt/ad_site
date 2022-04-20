@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Container, Form } from "react-bootstrap";
+
+import "../addAnnouncement/AddItem.css";
+
 import { useAppDispatch } from "../../hooks/redux";
 import { addNewAnnouncement } from "../../store/reducers/AnnouncementSlice";
 
-import { Container, Form } from "react-bootstrap";
-import "../addAnnouncement/AddItem.css";
-
 const AddItem: React.FunctionComponent = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [title, setTitle] = useState<string>("");
@@ -18,15 +20,16 @@ const AddItem: React.FunctionComponent = () => {
   };
 
   const handleSubmit = () => {
-    if (!title || !description) return;
-    const date = new Date().toDateString();
-    dispatch(addNewAnnouncement({ title, description, date }));
-    navigate("/");
+    if (title && description) {
+      const date = new Date().toDateString();
+
+      dispatch(addNewAnnouncement({ title, description, date }));
+      navigate("/");
+    }
   };
-  const navigate = useNavigate();
   return (
     <div className={"wrapper"}>
-      <Form className={"container_form"}>
+      <Form className={"container_form "}>
         <Form.Control
           value={title}
           onChange={({ target: { value } }) => setTitle(value)}
@@ -42,7 +45,7 @@ const AddItem: React.FunctionComponent = () => {
           className={"my-2"}
         />
 
-        <Container className={"add_buttons"}>
+        <Container className={"add_buttons add "}>
           <button
             className="btn btn-success px-3 mt-3 "
             disabled={!title || !description}

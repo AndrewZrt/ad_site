@@ -2,14 +2,10 @@
     border: 2px solid rgba(209, 209, 209, 0.6);
     border-radius: 5px;
     padding: 0 7px 0 7px;
-
 }
 
 .form {
     display: flex;
     gap: 10px;
-}
-
-button:hover {
-    background-color: red;
+    margin-right: 16px;
 }
